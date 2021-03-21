@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './Login'
+import Logout from './Logout'
 import Home from './Home'
 import Fruits from './components/fruits/Fruits'
 import Header from './Header'
 import Footer from './Footer'
+import AuthenticatedRouter from './utils/AuthenticatedRouter'
+import AuthenticationService from './utils/AuthenticationService'
 
 class Cupuama extends Component {
 
@@ -12,14 +15,16 @@ class Cupuama extends Component {
         return (
             <div>
                 <Router>
-                    <Header/>
+                    <Header />
                     <Switch>
                         <Route path="/login" exact component={Login} />
-                        <Route path="/home" exact component={Home} />
-                        <Route path="/fruits" exact component={Fruits} />
-                        <Route component={Login} />
+                        <AuthenticatedRouter path="/home" exact component={Home} />
+                        <AuthenticatedRouter path="/fruits" exact component={Fruits} />
+                        <Route path="/logout" exact component={Logout} />
+                        {AuthenticationService.isUserLogged() && <Route component={Home} />}
+                        {!AuthenticationService.isUserLogged() && <Route component={Login} />}
                     </Switch>
-                    <Footer/>
+                    <Footer />
                 </Router>
             </div>
         )
