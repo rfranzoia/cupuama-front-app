@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { Redirect } from 'react-router'
 import AuthenticationService from './utils/AuthenticationService'
 
 class Login extends Component {
@@ -29,7 +28,7 @@ class Login extends Component {
                 return { error: false }
             });
             AuthenticationService.login(this.state.username, this.state.password);
-            < Redirect to="/home" />
+            this.props.history.push("/home");
         }
     }
 

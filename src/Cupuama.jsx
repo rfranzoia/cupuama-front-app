@@ -20,7 +20,7 @@ class Cupuama extends Component {
                         <Route path="/login" exact component={Login} />
                         <AuthenticatedRouter path="/home" exact component={Home} />
                         <AuthenticatedRouter path="/fruits" exact component={Fruits} />
-                        <Route path="/logout" exact component={Logout} />
+                        <AuthenticatedRouter path="/logout" exact component={Logout} />
                         {AuthenticationService.isUserLogged() && <Route component={Home} />}
                         {!AuthenticationService.isUserLogged() && <Route component={Login} />}
                     </Switch>

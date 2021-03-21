@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, FormControl, Nav, NavDropdown } from 'react-bootstrap'
 import Navbar from 'react-bootstrap/Navbar'
+import { withRouter } from 'react-router'
 import AuthenticationService from './utils/AuthenticationService'
 
 class Header extends Component {
@@ -49,4 +50,4 @@ class Header extends Component {
     }
 }
 
-export default Header
+export default withRouter(Header)
