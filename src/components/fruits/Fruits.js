@@ -1,19 +1,69 @@
 import React, { Component } from 'react'
 import { Container, Row, Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-//import AuthenticationService from '../../utils/AuthenticationService'
-
+import FruitApi from '../../api/fruitApi'
 
 class Fruits extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            fruits: [
-                { id: 1, name: 'CUPUACU', initials: 'CUPU', harvest: '' },
-                { id: 2, name: 'GOIABA', initials: 'GOI', harvest: '' },
-                { id: 3, name: 'MARACUJA', initials: 'MARA', harvest: '' },
-            ]
+            fruits: []
         }
+
+    }
+
+    componentDidMount() {
+        this.listFruits()
+    }
+
+    componentDidUpdate() {
+
+    }
+
+    listFruits = () => {
+        FruitApi.list()
+            .then(response => {
+                console.log("response=>", response)
+                this.setState(() => {
+                    return { fruits: response.data.value }
+                })
+            })
+            .catch(error => {
+                console.log("=>", error)
+            });
+    }
+
+    getFruit = (id) => {
+        FruitApi.get(id)
+            .then(response => {
+                console.log("getFruit=>", response.data.value)
+            })
+            .catch(error => {
+                console.log("=>", error)
+            })
+    }
+
+    deleteFruit = (id) => {
+        FruitApi.delete(id)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("deleteFruit success!")
+                    this.props.history.push("/fruits")
+                } else {
+                    throw new Error('delete fail');
+                }
+            })
+            .catch(error => {
+                console.log("=>", error)
+            })
+    }
+
+    btnEditClicked = (event) => {
+        this.getFruit(event.target.name)
+    }
+
+    btnRemoveClicked = (event) => {
+        this.deleteFruit(event.target.name)
     }
 
     render() {
@@ -46,9 +96,9 @@ class Fruits extends Component {
                                                 <td>{fruit.initials}</td>
                                                 <td>{fruit.harvest}</td>
                                                 <td>
-                                                    <Button variant="primary" size="sm">Edit</Button>
+                                                    <Button variant="primary" size="sm" name={fruit.id} onClick={this.btnEditClicked}>Edit</Button>
                                                     <span>&nbsp;</span>
-                                                    <Button variant="danger" size="sm">Remove</Button>
+                                                    <Button variant="danger" size="sm" name={fruit.id} onClick={this.btnRemoveClicked}>Remove</Button>
                                                 </td>
                                             </tr>
                                     )

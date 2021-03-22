@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
+import loginApi from './api/loginApi'
 import AuthenticationService from './utils/AuthenticationService'
 
 class Login extends Component {
@@ -8,6 +9,7 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            authorization: '',
             error: false
         }
     }
@@ -27,8 +29,30 @@ class Login extends Component {
             this.setState((prevState) => {
                 return { error: false }
             });
-            AuthenticationService.login(this.state.username, this.state.password);
-            this.props.history.push("/home");
+
+            loginApi.login(this.state.username, this.state.password)
+                .then(response => {
+                    if (response.status !== 200) {
+                        this.setState((prevState) => {
+                            return { error: true }
+                        })
+                    }
+                    return response.json()
+                })
+                .then(data => {
+                    if (!this.state.error) {
+                        this.setState((prevState) => {
+                            return { error: false, authorization: data.value }
+                        })
+
+                        AuthenticationService.login(this.state.username, data.value);
+                        this.props.history.push("/home");
+                    }
+                    //console.log("result=>", data))
+                })
+                .catch(error => {
+                    console.log("Error =>", error)
+                })
         }
     }
 
