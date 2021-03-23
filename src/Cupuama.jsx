@@ -8,6 +8,7 @@ import Header from './Header'
 import Footer from './Footer'
 import AuthenticatedRouter from './utils/AuthenticatedRouter'
 import AuthenticationService from './utils/AuthenticationService'
+import EditFruit from './components/fruits/EditFruit'
 
 class Cupuama extends Component {
 
@@ -19,6 +20,7 @@ class Cupuama extends Component {
                     <Switch>
                         <Route path="/login" exact component={Login} />
                         <AuthenticatedRouter path="/home" exact component={Home} />
+                        <AuthenticatedRouter path="/fruits/:id" exact component={EditFruit} />
                         <AuthenticatedRouter path="/fruits" exact component={Fruits} />
                         <AuthenticatedRouter path="/logout" exact component={Logout} />
                         {AuthenticationService.isUserLogged() && <Route component={Home} />}

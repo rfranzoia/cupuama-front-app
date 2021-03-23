@@ -7,7 +7,8 @@ class Fruits extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            fruits: []
+            fruits: [],
+            message: null
         }
 
     }
@@ -23,32 +24,24 @@ class Fruits extends Component {
     listFruits = () => {
         FruitApi.list()
             .then(response => {
-                console.log("response=>", response)
-                this.setState(() => {
-                    return { fruits: response.data.value }
-                })
+                this.setState({ fruits: response.data.value })
+                console.log(this.state)
             })
             .catch(error => {
                 console.log("=>", error)
             });
     }
 
-    getFruit = (id) => {
-        FruitApi.get(id)
-            .then(response => {
-                console.log("getFruit=>", response.data.value)
-            })
-            .catch(error => {
-                console.log("=>", error)
-            })
+    editFruit = (id) => {
+        this.props.history.push(`/fruits/${id}`)
     }
 
     deleteFruit = (id) => {
         FruitApi.delete(id)
             .then(response => {
                 if (response.status === 200) {
-                    console.log("deleteFruit success!")
-                    this.props.history.push("/fruits")
+                    this.setState({ message: `fruit ${id} deleted successfully` })
+                    this.listFruits()
                 } else {
                     throw new Error('delete fail');
                 }
@@ -56,14 +49,6 @@ class Fruits extends Component {
             .catch(error => {
                 console.log("=>", error)
             })
-    }
-
-    btnEditClicked = (event) => {
-        this.getFruit(event.target.name)
-    }
-
-    btnRemoveClicked = (event) => {
-        this.deleteFruit(event.target.name)
     }
 
     render() {
@@ -74,9 +59,10 @@ class Fruits extends Component {
                         <h1>List of Fruits</h1>
                     </Row>
                     <Row>
-                        <div><Button variant="primary" size="sm">New Fruit</Button></div>
+                        <div><Button variant="primary" size="sm" onClick={() => this.editFruit(-1)}>Create</Button></div>
                         <hr />
                     </Row>
+                    {this.state.message && <div className="alert alert-warning">{this.state.message}</div>}
                     <Row>
                         <Table bordered hover size="sm">
                             <thead>
@@ -96,9 +82,9 @@ class Fruits extends Component {
                                                 <td>{fruit.initials}</td>
                                                 <td>{fruit.harvest}</td>
                                                 <td>
-                                                    <Button variant="primary" size="sm" name={fruit.id} onClick={this.btnEditClicked}>Edit</Button>
+                                                    <Button variant="primary" size="sm" onClick={() => this.editFruit(fruit.id)}>Update</Button>
                                                     <span>&nbsp;</span>
-                                                    <Button variant="danger" size="sm" name={fruit.id} onClick={this.btnRemoveClicked}>Remove</Button>
+                                                    <Button variant="danger" size="sm" onClick={() => this.deleteFruit(fruit.id)}>Remove</Button>
                                                 </td>
                                             </tr>
                                     )

@@ -6,7 +6,6 @@ class FruitApi {
     //GET_URL = `http://localhost:8080/cupuama-go/api/v2/fruits/${id}`
 
     list = () => {
-        console.log("listing fruits");
         return axios.get("http://localhost:8080/cupuama-go/api/v2/fruits")
     }
 
@@ -16,6 +15,14 @@ class FruitApi {
 
     delete = (id) => {
         return axios.delete(`http://localhost:8080/cupuama-go/api/v2/fruits/${id}`)
+    }
+
+    update = (id, fruit) => {
+        return axios.put(`http://localhost:8080/cupuama-go/api/v2/fruits/${id}`, fruit)
+    }
+
+    create = (fruit) => {
+        return axios.post("http://localhost:8080/cupuama-go/api/v2/fruits", fruit)
     }
 }
 
