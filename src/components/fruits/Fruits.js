@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Table } from 'react-bootstrap'
+import { Col, Container, Row, Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import FruitApi from '../../api/fruitApi'
 
@@ -56,10 +56,7 @@ class Fruits extends Component {
             <div>
                 <Container>
                     <Row>
-                        <h1>List of Fruits</h1>
-                    </Row>
-                    <Row>
-                        <div><Button variant="primary" size="sm" onClick={() => this.editFruit(-1)}>Create</Button></div>
+                        <h1>Fruits</h1>
                         <hr />
                     </Row>
                     {this.state.message && <div className="alert alert-warning">{this.state.message}</div>}
@@ -82,15 +79,23 @@ class Fruits extends Component {
                                                 <td>{fruit.initials}</td>
                                                 <td>{fruit.harvest}</td>
                                                 <td>
-                                                    <Button variant="primary" size="sm" onClick={() => this.editFruit(fruit.id)}>Update</Button>
-                                                    <span>&nbsp;</span>
-                                                    <Button variant="danger" size="sm" onClick={() => this.deleteFruit(fruit.id)}>Remove</Button>
+                                                    <Row className="justify-content-md-center">
+                                                        <Col xs={1}>
+                                                            <Button variant="primary" size="sm" onClick={() => this.editFruit(fruit.id)}>Update</Button>
+                                                        </Col>
+                                                        <Col xs={4}>
+                                                            <Button variant="danger" size="sm" onClick={() => this.deleteFruit(fruit.id)}>Remove</Button>
+                                                        </Col>
+                                                    </Row>
                                                 </td>
                                             </tr>
                                     )
                                 }
                             </tbody>
                         </Table>
+                    </Row>
+                    <Row>
+                        <div><Button variant="primary" size="sm" onClick={() => this.editFruit(-1)}>Create</Button></div>
                     </Row>
                 </Container>
             </div>

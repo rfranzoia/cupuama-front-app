@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import React, { Component } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import fruitApi from '../../api/fruitApi'
 
 
@@ -27,14 +27,12 @@ class EditFruit extends Component {
         }
 
         if (this.state.type === "create") {
-            console.log('creating new fruit', fruit)
             fruitApi.create(fruit)
                 .then(response => {
                     this.listFruits()
                 })
                 .catch(error => console.log(error))
         } else {
-            console.log('updating fruit', fruit)
             fruitApi.update(this.state.id, fruit)
                 .then(response => {
                     this.listFruits()
@@ -83,49 +81,52 @@ class EditFruit extends Component {
         let initials = this.state.initials
         let harvest = this.state.harvest
         return (
-            <Container>
-                <h1>Fruit</h1>
-                <hr />
-                <Formik
-                    initialValues={{ name, initials, harvest }}
-                    onSubmit={this.onSubmit}
-                    validateOnBlur={false}
-                    validateOnChange={false}
-                    validate={this.validate}
-                    enableReinitialize={true}>
-                    {
-                        () => {
-                            return (
-                                <Container>
-                                    <Form>
-                                        <ErrorMessage name="name" component="div" className="alert alert-warning" />
-                                        <ErrorMessage name="initials" component="div" className="alert alert-warning" />
-                                        <fieldset className="form-group">
-                                            <Field className="form-control" id="name" name="name" placeholder="Fruit Name" />
-                                        </fieldset>
-                                        <Row>
-                                            <Col>
+            <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" style={{ padding: '10px' }}>
+                <Card border="secondary" style={{ width: '50rem' }}>
+                    <Card.Header>Fruit</Card.Header>
+                    <Card.Body>
+                        <Formik
+                            initialValues={{ name, initials, harvest }}
+                            onSubmit={this.onSubmit}
+                            validateOnBlur={false}
+                            validateOnChange={false}
+                            validate={this.validate}
+                            enableReinitialize={true}>
+                            {
+                                () => {
+                                    return (
+                                        <Container>
+                                            <Form>
+                                                <ErrorMessage name="name" component="div" className="alert alert-warning" />
+                                                <ErrorMessage name="initials" component="div" className="alert alert-warning" />
                                                 <fieldset className="form-group">
-                                                    <Field className="form-control" id="initials" name="initials" placeholder="Fruit initials" />
+                                                    <Field className="form-control" id="name" name="name" placeholder="Fruit Name" />
                                                 </fieldset>
-                                            </Col>
-                                            <Col>
-                                                <fieldset className="form-group">
-                                                    <Field className="form-control" id="harvest" name="harvest" placeholder="Harvest" />
-                                                </fieldset>
-                                            </Col>
-                                        </Row>
-                                        <Button variant="primary" type="submit">Save</Button>
+                                                <Row>
+                                                    <Col>
+                                                        <fieldset className="form-group">
+                                                            <Field className="form-control" id="initials" name="initials" placeholder="Fruit initials" />
+                                                        </fieldset>
+                                                    </Col>
+                                                    <Col>
+                                                        <fieldset className="form-group">
+                                                            <Field className="form-control" id="harvest" name="harvest" placeholder="Harvest" />
+                                                        </fieldset>
+                                                    </Col>
+                                                </Row>
+                                                <Button variant="primary" type="submit">Save</Button>
                                         &nbsp;
                                         <Button variant="danger" onClick={() => this.listFruits()}>Cancel</Button>
-                                    </Form>
-                                </Container>
-                            )
-                        }
-                    }
-                </Formik>
+                                            </Form>
+                                        </Container>
+                                    )
+                                }
+                            }
+                        </Formik>
+                    </Card.Body>
+                </Card>
+            </div>
 
-            </Container>
         )
     }
 }
