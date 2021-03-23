@@ -21,6 +21,8 @@ class Login extends Component {
     }
 
     buttonClicked = (event) => {
+        event.preventDefault();
+
         if (this.state.username === '' || this.state.password === '') {
             this.setState((prevState) => {
                 return { error: true }
@@ -36,19 +38,15 @@ class Login extends Component {
                         this.setState((prevState) => {
                             return { error: true }
                         })
-                    }
-                    return response.json()
-                })
-                .then(data => {
-                    if (!this.state.error) {
+                    } else {
                         this.setState((prevState) => {
-                            return { error: false, authorization: data.value }
+                            return { error: false, authorization: response.data.value }
                         })
 
-                        AuthenticationService.login(this.state.username, data.value);
+                        AuthenticationService.login(this.state.username, response.data.value);
                         this.props.history.push("/home");
                     }
-                    //console.log("result=>", data))
+                    return response.json()
                 })
                 .catch(error => {
                     console.log("Error =>", error)
@@ -70,7 +68,7 @@ class Login extends Component {
                     <Form.Group controlId="formBasicPassword">
                         <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleFields} />
                     </Form.Group>
-                    <Button variant="primary" onClick={this.buttonClicked}>Login</Button>
+                    <Button variant="primary" type="submit" onClick={this.buttonClicked}>Login</Button>
                 </Form>
             </Container>
         )

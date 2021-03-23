@@ -61,8 +61,8 @@ class Fruits extends Component {
                     </Row>
                     {this.state.message && <div className="alert alert-warning">{this.state.message}</div>}
                     <Row>
-                        <Table bordered hover size="sm">
-                            <thead>
+                        <Table striped bordered hover size="sm">
+                            <thead style={{ backgroundColor: "#a6aabf" }}>
                                 <tr>
                                     <th>Name</th>
                                     <th>Initials</th>
