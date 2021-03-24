@@ -6,7 +6,7 @@ class Footer extends Component {
             <footer className="footer">
                 <span className="text-muted">All Rights Reserved 2021 @franzoia</span>
             </footer>
-            
+
         )
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import loginApi from './api/loginApi'
-import AuthenticationService from './utils/AuthenticationService'
+import loginApi from '../../api/loginApi'
+import AuthenticationService from '../../utils/AuthenticationService'
 
 class Login extends Component {
     constructor() {

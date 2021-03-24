@@ -81,7 +81,7 @@ class EditFruit extends Component {
         let initials = this.state.initials
         let harvest = this.state.harvest
         return (
-            <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" style={{ padding: '10px' }}>
+            <div className="d-flex flex-column justify-content-center align-items-center" style={{ padding: '10px' }}>
                 <Card border="secondary" style={{ width: '50rem' }}>
                     <Card.Header>Fruit</Card.Header>
                     <Card.Body>

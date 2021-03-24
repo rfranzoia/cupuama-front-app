@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from 'react-bootstrap'
-import AuthenticationService from './utils/AuthenticationService'
+import AuthenticationService from '../../utils/AuthenticationService'
 
 class Logout extends Component {
     render() {
