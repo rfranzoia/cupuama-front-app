@@ -24,8 +24,7 @@ class Fruits extends Component {
     listFruits = () => {
         FruitApi.list()
             .then(response => {
-                this.setState({ fruits: response.data.value })
-                console.log(this.state)
+                this.setState({ fruits: response.data })
             })
             .catch(error => {
                 console.log("=>", error)

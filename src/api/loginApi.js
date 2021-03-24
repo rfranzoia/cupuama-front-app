@@ -1,16 +1,18 @@
 import axios from "axios";
-import MD5 from "crypto-js/md5";
+
+export const URL_LOGIN_GO = 'http://localhost:8080/cupuama-go/api/v2/login'
+export const URL_LOGIN_JAVA = 'http://localhost:8080/cupuama-app/login'
 
 class LoginApi {
 
     login = (username, password) => {
 
         const data = {
-            "login": username,
-            "password": MD5(password).toString()
+            "username": "admin",
+            "password": "p4ssw0rd"
         }
 
-        return axios.post('http://localhost:8080/cupuama-go/api/v2/login', data)
+        return axios.post(`${URL_LOGIN_JAVA}`, data)
     }
 }
 

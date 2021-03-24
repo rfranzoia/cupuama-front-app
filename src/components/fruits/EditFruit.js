@@ -65,7 +65,7 @@ class EditFruit extends Component {
         } else {
             fruitApi.get(this.props.match.params.id)
                 .then(response => {
-                    let fruit = response.data.value;
+                    let fruit = response.data;
                     this.setState({
                         id: fruit.id,
                         name: fruit.name,

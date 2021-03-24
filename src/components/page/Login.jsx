@@ -40,13 +40,12 @@ class Login extends Component {
                         })
                     } else {
                         this.setState((prevState) => {
-                            return { error: false, authorization: response.data.value }
+                            return { error: false, authorization: response.headers.authorization }
                         })
 
-                        AuthenticationService.login(this.state.username, response.data.value);
+                        AuthenticationService.login(this.state.username, response.headers.authorization);
                         this.props.history.push("/home");
                     }
-                    return response.json()
                 })
                 .catch(error => {
                     console.log("Error =>", error)

@@ -7,7 +7,7 @@ class Logout extends Component {
         AuthenticationService.logout()
         setTimeout(() => {
             this.props.history.push("/login")
-        }, 5000)
+        }, 2000)
         return (
             <Container>
                 <h1>Goodbye!</h1>
