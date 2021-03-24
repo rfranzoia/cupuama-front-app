@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col, Container, Row, Table } from 'react-bootstrap'
+import { Container, Row, Table } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import FruitApi from '../../api/fruitApi'
 
@@ -79,14 +79,9 @@ class Fruits extends Component {
                                                 <td>{fruit.initials}</td>
                                                 <td>{fruit.harvest}</td>
                                                 <td>
-                                                    <Row className="justify-content-md-center">
-                                                        <Col xs={1}>
-                                                            <Button variant="primary" size="sm" onClick={() => this.editFruit(fruit.id)}>Update</Button>
-                                                        </Col>
-                                                        <Col xs={4}>
-                                                            <Button variant="danger" size="sm" onClick={() => this.deleteFruit(fruit.id)}>Remove</Button>
-                                                        </Col>
-                                                    </Row>
+                                                    <Button variant="primary" size="sm" onClick={() => this.editFruit(fruit.id)}>Update</Button>
+                                                    &nbsp;
+                                                    <Button variant="danger" size="sm" onClick={() => this.deleteFruit(fruit.id)}>Remove</Button>
                                                 </td>
                                             </tr>
                                     )
