@@ -15,23 +15,19 @@ class Header extends Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link href="/home">Home</Nav.Link>
-                            {AuthenticationService.isUserLogged() &&
                                 <NavDropdown title="Manage" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/fruits">Fruits</NavDropdown.Item>
                                     <NavDropdown.Item href="/products">Products</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="orders">Orders</NavDropdown.Item>
                                 </NavDropdown>
-                            }
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
-                        {AuthenticationService.isUserLogged() &&
                             <Form inline>
                                 <FormControl type="text" placeholder="Search" className="mr-sm-4" />
                                 <Button variant="outline-success">Search</Button>
                             </Form>
-                        }
                         <Nav.Item>
                             <Nav.Link href="#home" disabled>&nbsp;</Nav.Link>
                         </Nav.Item>

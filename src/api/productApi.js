@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const URL_NODE = 'http://localhost:3000/api/fruits'
-export const URL_JAVA = 'http://localhost:8080/cupuama-app/v1/fruits'
-export const URL_GO = 'http://localhost:8080/cupuama-go/api/v2/fruits'
+export const URL_NODE = 'http://localhost:3000/api/products'
+export const URL_JAVA = 'http://localhost:8080/cupuama-app/v1/products'
+export const URL_GO = 'http://localhost:8080/cupuama-go/api/v2/products'
 
-class FruitApi {
+class ProductApi {
 
     getAuthConfig = () => {
         return {
@@ -18,8 +18,8 @@ class FruitApi {
         return axios.get(`${URL_NODE}`, this.getAuthConfig())
     }
 
-    create = (fruit) => {
-        return axios.post(`${URL_NODE}`, fruit)
+    create = (product) => {
+        return axios.post(`${URL_NODE}`, product)
     }
 
     get = (id) => {
@@ -30,10 +30,10 @@ class FruitApi {
         return axios.delete(`${URL_NODE}/${id}`, this.getAuthConfig())
     }
 
-    update = (id, fruit) => {
-        return axios.put(`${URL_NODE}/${id}`, fruit)
+    update = (id, product) => {
+        return axios.put(`${URL_NODE}/${id}`, product)
     }
 
 }
 
-export default new FruitApi()
+export default new ProductApi()

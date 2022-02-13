@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const URL_LOGIN_GO = 'http://localhost:8080/cupuama-go/api/v2/login'
-export const URL_LOGIN_JAVA = 'http://localhost:8080/cupuama-app/login'
+export const URL_LOGIN_JAVA = 'http://localhost:4200/cupuama-app/login'
 
 class LoginApi {
 
